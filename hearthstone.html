@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.enemy{
+			
+			margin-top: 100px;
+			text-align:center;
+			height: 250px;
+		}
+		.player_img{
+			width: 200px;
+			height: 300px;
+			margin-left: auto;
+			margin-right: auto;
+			background-size: 100% 100%;
+			position: relative;
+			transition: 1s;
+
+		}
+		.enemy_img{
+			width: 200px;
+			height: 300px;
+			margin-left: auto;
+			margin-right: auto;
+			background-size: 100% 100%;
+			position: relative;
+			transition: 1s;
+
+		}
+		.player{
+			
+			text-align: center;
+			height: 250px;
+			margin-top: 150px;
+
+		}
+		.player_property{
+			position: absolute;
+			top:80%;
+
+
+		}
+		.enemy_name{
+			color: white; font-family: Arial;
+		}
+		.player_name{
+			color: white; font-family: Arial
+		}
+	</style>
+</head>
+<body style="background-image: url(images/bg.jpg); background-size: 100% ">
+
+	<div class="enemy">
+		<h1 class="enemy_name"></h1>
+
+		<div class="enemy_img">
+			<h2 class="enemy_hp player_property" style="left: 10%;">0</h2>
+			<h2 class="enemy_damage player_property" style="left: 82%;">0</h2>
+		</div>	
+		<button class="btn" style="position: absolute;">сражение</button>
+	</div>
+
+	<div class="player">
+		<h1 class="player_name"></h1>
+		
+		<div class="player_img">
+			<h2 class="player_hp player_property" style="left: 10%;">0</h2>
+			<h2 class="player_damage player_property" style="left: 82%;">0</h2>
+		</div>
+
+	</div>
+
+	<script type="text/javascript">
+	let player = document.querySelector(".player");
+	let enemy = document.querySelector(".enemy");
+
+	let hp_pl = document.querySelector(".player_hp");
+	let hp_en = document.querySelector(".enemy_hp");
+
+	let dmg_pl = document.querySelector(".player_damage");
+	let dmg_en = document.querySelector(".enemy_damage");
+
+	let img_pl = document.querySelector(".player_img");
+	let img_en = document.querySelector(".enemy_img");
+
+
+	let btn = document.querySelector('.btn')
+
+let randomizer = function(arg) {
+	let random = Math.random() * arg;//енератор случайного числа
+	let round = Math.round(random)//кругление числа
+	return round
+}
+
+	let user = {
+		name : "player",
+		url : "url(7.png)",
+		hp : randomizer(1000),
+		dmg : randomizer(100)
+
+	}
+
+	let user2 = {
+		name : "enemy",
+		url : "url(5.png)",
+		hp : randomizer(1000),
+		dmg : randomizer(100)		
+	}
+
+	img_pl.style.backgroundImage = user.url;
+	img_en.style.backgroundImage = user2.url;
+
+	hp_pl.innerHTML = user.hp;
+	hp_en.innerHTML = user2.hp;
+
+	dmg_pl.innerHTML = user.dmg;
+	dmg_en.innerHTML = user2.dmg;
+
+	btn.onclick = function() {
+		user.hp = user.hp - user2.dmg
+		hp_pl.innerHTML = user.hp
+		user2.hp = user2.hp - user.dmg
+		hp_en.innerHTML = user2.hp
+		if(user.hp<0){
+			alert('Потрачено(вы погибли)')
+		}
+		if(user2.hp<0) {
+			alert('Вы разнесли противника в пух и прах')
+		}
+	}
+	</script>
+</body>
+</html>
